@@ -20,19 +20,29 @@ function App() {
     setStore(aux);
   };
 
-  const eliminarTarea = (item) => {
+  const eliminarTarea = (id) => {
     let aux = {
-      tareas: store.tareas.filter(tarea => tarea.id != item.id)
+      tareas: store.tareas.filter(tarea => tarea.id != id)
     }
 
     setStore(aux);
   };
 
+  const editarTarea = (item) => {
+    let pos = store.tareas.findIndex(x => x.id == item.id);
+    let array = store.tareas;
+    array[pos] = item;
 
+    let aux = {
+      tareas: array
+    }
+
+    setStore(aux);
+  }
   return (
     <div>
       <IngresarTarea onChange={agregarTarea} />
-      <ContenedorTareas tareas = {store.tareas} eliminarTarea = {eliminarTarea}/>
+      <ContenedorTareas tareas = {store.tareas} eliminarTarea = {eliminarTarea} editarTarea={editarTarea}/>
     </div>
   );
 }

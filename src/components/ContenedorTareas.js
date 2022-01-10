@@ -1,7 +1,7 @@
 import MostrarTarea from "./MostrarTarea";
 
 export default function ContenedorTareas(props) {
-    const {tareas, eliminarTarea} = props; 
+    const {tareas, eliminarTarea, editarTarea} = props; 
 
     return (
         <ul>
@@ -9,7 +9,7 @@ export default function ContenedorTareas(props) {
                 (item, index) => {
                     return (
                     <li key={index}>
-                        <MostrarTarea item={item} eliminarTarea={eliminarTarea} /> 
+                        <MostrarTarea item={item} eliminarTarea={eliminarTarea} editarTarea={editarTarea}/> 
                     </li>
                     );
                 }
