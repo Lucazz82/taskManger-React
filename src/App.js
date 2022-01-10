@@ -1,23 +1,31 @@
 import logo from './logo.svg';
 import './App.css';
+import { IngresarTarea } from './components/IngresarTarea';
+import { useState } from 'react';
+import ContenedorTareas from './components/ContenedorTareas';
 
 function App() {
+  // const store = {
+  //   tareas: [
+  //     "Comida del perro",
+  //     "Ir a fruteria"
+  //   ]
+  // }
+
+  const [store, setStore] = useState({tareas: []});
+
+  const agregarTarea = (tarea) => {
+    let aux = {
+      tareas: store.tareas
+    };
+    aux.tareas.unshift(tarea);
+    setStore(aux);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <IngresarTarea onChange={agregarTarea} />
+      <ContenedorTareas tareas = {store.tareas} />
     </div>
   );
 }
