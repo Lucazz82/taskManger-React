@@ -1,14 +1,15 @@
 export default function MostrarTarea(props) {
-    const {tarea} = props;
+    const {item, eliminarTarea} = props;
+    
     return (
         <div>
             <p>
-                {tarea}
+                {item.tarea}
             </p>
             <button>
                 Editar
             </button>
-            <button>
+            <button onClick={() => {eliminarTarea(item.id)}}>
                 Eliminar
             </button>
         </div>

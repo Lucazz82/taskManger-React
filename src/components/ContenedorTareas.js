@@ -1,22 +1,19 @@
 import MostrarTarea from "./MostrarTarea";
 
 export default function ContenedorTareas(props) {
-    const {tareas} = props;
-
-    const lista = tareas.map(
-        (tarea, index) => {
-            return (
-                <li key={index}>
-                    <MostrarTarea tarea={tarea} /> 
-                </li>
-            );
-        }
-    );
+    const {tareas, eliminarTarea} = props; 
 
     return (
-        // {tareas.map((tarea) => {<mostrarTarea tarea={tarea} />})}
         <ul>
-            {lista}
+            {tareas.map(
+                (item, index) => {
+                    return (
+                    <li key={index}>
+                        <MostrarTarea item={item} eliminarTarea={eliminarTarea} /> 
+                    </li>
+                    );
+                }
+        )}
         </ul>
     );
 }
