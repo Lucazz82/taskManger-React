@@ -15,31 +15,48 @@ export default function MostrarTarea(props) {
         setEstaEditando(false);
     }
 
+    const checkEnter = (e) => {
+        if(e.charCode == 13)
+            confirmarCambios();
+    }
+
     useEffect(() => {
         setTareaEditada(item.tarea);
     }, [estaEditando]);
 
     return (
-        <div>
+        <div className="row align-items-center">
             {!estaEditando &&
-                <> 
-                <p>
-                    {item.tarea}
-                </p>
-                <button onClick={() => {setEstaEditando(true)}}>
-                    Editar
-                </button>
-                <button onClick={() => {eliminarTarea(item.id)}}>
-                    Eliminar
-                </button>
+                <>
+                    <div className="col col-md-8 col-auto"> 
+                        <p>
+                            {item.tarea}
+                        </p>
+                    </div>
+                    <div className="col col-md-1 col-auto">
+                        <button className="btn btn-warning" onClick={() => {setEstaEditando(true)}}>
+                            Editar
+                        </button>
+                    </div>
+                    <div className="col col-md-1 col-auto">
+                        <button className="btn btn-danger" onClick={() => {eliminarTarea(item.id)}}>
+                            Eliminar
+                        </button>
+                    </div>
                 </>
             }
 
             {estaEditando && 
                 <>
-                    <input value={tareaEditada} onChange={(e) => {setTareaEditada(e.target.value)}} />
-                    <button onClick={confirmarCambios}>Confirmar</button>
-                    <button onClick={() => {setEstaEditando(false)}}>Cancelar</button>
+                <div className="col col-md-8 col-auto"> 
+                    <input className="form-control" value={tareaEditada} onChange={(e) => {setTareaEditada(e.target.value)}} onKeyPress={(e) => {checkEnter(e)}}/>
+                </div>
+                <div className="col col-md-1 col-auto">
+                    <button className="btn btn-success" onClick={confirmarCambios}>Confirmar</button>
+                </div>
+                <div className="col col-md-1 col-auto">
+                    <button className="btn btn-danger" onClick={() => {setEstaEditando(false)}}>Cancelar</button>
+                </div>
                 </>
             }
         </div>

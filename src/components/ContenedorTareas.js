@@ -4,11 +4,11 @@ export default function ContenedorTareas(props) {
     const {tareas, eliminarTarea, editarTarea} = props; 
 
     return (
-        <ul>
+        <ul className="list-group list-group-flush">
             {tareas.map(
                 (item, index) => {
                     return (
-                    <li key={index}>
+                    <li className="list-group-item" key={index}>
                         <MostrarTarea item={item} eliminarTarea={eliminarTarea} editarTarea={editarTarea}/> 
                     </li>
                     );
