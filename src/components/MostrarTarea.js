@@ -1,25 +1,39 @@
 import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { editar, eliminar } from "../redux/actions/tareas/actions";
 
 export default function MostrarTarea(props) {
-    const {item, eliminarTarea, editarTarea} = props;
+    const {item} = props;
     const [estaEditando, setEstaEditando] = useState(false);
     const [tareaEditada, setTareaEditada] = useState(item.tarea);
+    const dispatch = useDispatch();
     
     const confirmarCambios = () => {
         let aux = {
             id: item.id,
             tarea: tareaEditada
         }
+
+        let action = editar(aux);
         
-        editarTarea(aux);
+        dispatch(action);
         setEstaEditando(false);
     }
 
+    const eliminarTarea = (id) => {
+        let aux = {
+            id: id
+        }
+
+        let action = eliminar(aux);
+        dispatch(action);
+    }
+    
     const checkEnter = (e) => {
-        if(e.charCode == 13)
+        if(e.charCode === 13)
             confirmarCambios();
     }
-
+    
     useEffect(() => {
         setTareaEditada(item.tarea);
     }, [estaEditando]);

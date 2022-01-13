@@ -1,15 +1,18 @@
+import { useSelector } from "react-redux";
 import MostrarTarea from "./MostrarTarea";
 
-export default function ContenedorTareas(props) {
-    const {tareas, eliminarTarea, editarTarea} = props; 
+export default function ContenedorTareas() {
+    const items = useSelector(
+        (state) => state.tareas
+    );
 
     return (
         <ul className="list-group list-group-flush">
-            {tareas.map(
+            {items.tareas.map(
                 (item, index) => {
                     return (
                     <li className="list-group-item" key={index}>
-                        <MostrarTarea item={item} eliminarTarea={eliminarTarea} editarTarea={editarTarea}/> 
+                        <MostrarTarea item={item} /> 
                     </li>
                     );
                 }

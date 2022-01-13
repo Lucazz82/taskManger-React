@@ -1,16 +1,26 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { agregar } from "../redux/actions/tareas/actions";
 
-export function IngresarTarea (props) {
+export function IngresarTarea () {
     const [tarea, setTarea] = useState('');
-    const {onChange} = props;
+    const [id, setId] = useState(0);
+    const dispatch = useDispatch();
 
     const guardarTarea = () => {
-        onChange(tarea);
-        setTarea('');
-    }
+        let aux = {
+            id: id,
+            tarea: tarea
+        }
 
+        let action = agregar(aux);
+        dispatch(action);
+        setTarea('');
+        setId(id + 1);
+    }
+    
     const checkEnter = (e) => {
-        if(e.charCode == 13)
+        if(e.charCode === 13)
             guardarTarea();
     }
 
